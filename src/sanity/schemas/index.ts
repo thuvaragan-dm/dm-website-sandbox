@@ -1,3 +1,4 @@
 import HeroConfigSchema from "./HeroConfigSchema";
+import NavConfigSchema from "./NavConfigSchema";
 
-export default [HeroConfigSchema];
+export default [HeroConfigSchema, NavConfigSchema];

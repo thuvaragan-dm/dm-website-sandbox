@@ -1,12 +1,17 @@
 import { HeroHighlight } from "@/components/HeroHighlight";
-import { getHeroConfig } from "@/sanity/sanity-utils";
+import { getHeroConfig, getNavConfig } from "@/sanity/sanity-utils";
 import AgentBuilderPrompt from "./AgentBuilderPrompt";
+import Navbar from "@/components/layouts/Navbar";
 
 const Page = async () => {
   const heroConfigs = await getHeroConfig();
+  const navConfigs = await getNavConfig();
 
   return (
-    <main className="overflow-x-hidden">
+    <main className="overflow-x-hidden bg-skin-primary-dark">
+      <Navbar configs={navConfigs} />
+
+      {/* Hero section */}
       <HeroHighlight
         containerClassName="min-h-dvh flex flex-col justify-start"
         patternClassName="[mask-image:linear-gradient(180deg,transparent,white,white,transparent)]"
@@ -46,6 +51,11 @@ const Page = async () => {
           <AgentBuilderPrompt configs={heroConfigs} />
         </section>
       </HeroHighlight>
+      {/* hero section */}
+
+      {/* Feature section */}
+      <section className="min-h-dvh"></section>
+      {/* Feature section */}
     </main>
   );
 };

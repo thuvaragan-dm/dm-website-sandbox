@@ -1,5 +1,6 @@
 import { createClient, groq } from "next-sanity";
 import { HeroConfigType } from "./schemas/HeroConfigSchema";
+import { NavConfigType } from "./schemas/NavConfigSchema";
 
 export async function getHeroConfig() {
   const client = createClient({
@@ -16,6 +17,23 @@ export async function getHeroConfig() {
       "suggestions": suggestions[] {
           name,
           content
+        }
+    }`,
+  );
+}
+
+export async function getNavConfig() {
+  const client = createClient({
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+    apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION!,
+  });
+
+  return await client.fetch<NavConfigType>(
+    groq`*[_type == "nav-config"][0]{
+      "links": links[] {
+          name,
+          href
         }
     }`,
   );
