@@ -1,8 +1,8 @@
 import { Rule } from "sanity";
 
 export default {
-  name: "general-config",
-  title: "General Config",
+  name: "hero-config",
+  title: "Hero Config",
   type: "document",
 
   fields: [
@@ -40,7 +40,7 @@ export default {
   ],
 };
 
-export type GeneralConfigType = {
+export type HeroConfigType = {
   whatsNew?: string;
   heading: string;
   subHeading: string;

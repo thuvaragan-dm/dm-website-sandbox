@@ -1,15 +1,15 @@
 import { createClient, groq } from "next-sanity";
-import { GeneralConfigType } from "./schemas/GeneralConfigSchema";
+import { HeroConfigType } from "./schemas/HeroConfigSchema";
 
-export async function getGeneralConfig() {
+export async function getHeroConfig() {
   const client = createClient({
     projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
     dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
     apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION!,
   });
 
-  const queryResult = await client.fetch<GeneralConfigType>(
-    groq`*[_type == "general-config"][0]{
+  return await client.fetch<HeroConfigType>(
+    groq`*[_type == "hero-config"][0]{
       whatsNew,
       heading,
       subHeading,
@@ -19,6 +19,4 @@ export async function getGeneralConfig() {
         }
     }`,
   );
-
-  return queryResult;
 }

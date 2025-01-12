@@ -1,3 +1,3 @@
-import GeneralConfigSchema from "./GeneralConfigSchema";
+import HeroConfigSchema from "./HeroConfigSchema";
 
-export default [GeneralConfigSchema];
+export default [HeroConfigSchema];

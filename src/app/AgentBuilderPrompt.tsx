@@ -1,10 +1,10 @@
 "use client";
 
 import { BorderBeam } from "@/components/BorderBeam";
-import { GeneralConfigType } from "@/sanity/schemas/GeneralConfigSchema";
+import { HeroConfigType } from "@/sanity/schemas/HeroConfigSchema";
 import React, { useRef } from "react";
 
-const AgentBuilderPrompt = ({ configs }: { configs: GeneralConfigType }) => {
+const AgentBuilderPrompt = ({ configs }: { configs: HeroConfigType }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   return (
     <div className="relative mx-auto mt-16 w-full max-w-screen-sm rounded-3xl bg-skin-primary-dark/50 shadow-[0px_0px_100px_20px_rgba(66,28,164,0.5),0px_0px_10px_5px_rgba(66,28,164,0.9)] ring-2 ring-white/10">

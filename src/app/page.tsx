@@ -1,9 +1,9 @@
 import { HeroHighlight } from "@/components/HeroHighlight";
-import { getGeneralConfig } from "@/sanity/sanity-utils";
+import { getHeroConfig } from "@/sanity/sanity-utils";
 import AgentBuilderPrompt from "./AgentBuilderPrompt";
 
 const Page = async () => {
-  const configs = await getGeneralConfig();
+  const heroConfigs = await getHeroConfig();
 
   return (
     <main className="overflow-x-hidden">
@@ -15,7 +15,7 @@ const Page = async () => {
           {/* Heading */}
           <div className="flex flex-col items-center justify-center">
             {/* badge */}
-            {configs.whatsNew && (
+            {heroConfigs.whatsNew && (
               <div className="mb-5 flex w-max items-center justify-start gap-3 rounded-full bg-white/30 p-0.5 pr-3 text-[0.65rem] font-semibold uppercase tracking-widest text-white ring-1 ring-gray-600/50">
                 <span className="flex w-max items-center justify-start gap-2 rounded-full bg-gradient-to-r from-skin-primary/70 to-skin-primary-yellow/70 px-2 py-1">
                   <svg className="size-4 text-white" viewBox="0 0 24 24">
@@ -28,22 +28,22 @@ const Page = async () => {
                   </svg>
                   <p className="hidden md:block">Whats new</p>
                 </span>
-                {configs.whatsNew}
+                {heroConfigs.whatsNew}
               </div>
             )}
             {/* badge */}
 
             <h1 className="max-w-7xl text-balance text-center text-4xl font-medium text-white md:text-6xl">
-              {configs.heading}
+              {heroConfigs.heading}
             </h1>
 
             <p className="mt-5 text-center font-mono text-xs text-white/80 md:text-lg">
-              {configs.subHeading}
+              {heroConfigs.subHeading}
             </p>
           </div>
           {/* Heading */}
 
-          <AgentBuilderPrompt configs={configs} />
+          <AgentBuilderPrompt configs={heroConfigs} />
         </section>
       </HeroHighlight>
     </main>
