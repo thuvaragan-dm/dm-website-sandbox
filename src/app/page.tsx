@@ -1,11 +1,18 @@
 import { HeroHighlight } from "@/components/HeroHighlight";
-import { getHeroConfig, getNavConfig } from "@/sanity/sanity-utils";
+import {
+  getHeroConfig,
+  getKeyFeaturesConfig,
+  getNavConfig,
+  getTechnologyConfig,
+} from "@/sanity/sanity-utils";
 import AgentBuilderPrompt from "./AgentBuilderPrompt";
 import Navbar from "@/components/layouts/Navbar";
 
 const Page = async () => {
   const heroConfigs = await getHeroConfig();
   const navConfigs = await getNavConfig();
+  const keyFeaturesConfigs = await getKeyFeaturesConfig();
+  const technologyConfigs = await getTechnologyConfig();
 
   return (
     <main className="overflow-x-hidden bg-skin-primary-dark">
@@ -13,14 +20,14 @@ const Page = async () => {
 
       {/* Hero section */}
       <HeroHighlight
-        containerClassName="pt-16 min-h-dvh flex flex-col justify-start"
+        containerClassName="pt-20 h-[55rem] flex flex-col justify-start"
         patternClassName="[mask-image:linear-gradient(180deg,transparent,white,white,transparent)]"
       >
-        <section className="flex min-h-dvh flex-1 flex-col items-center justify-center p-10">
+        <section className="flex flex-1 flex-col items-center justify-center p-10">
           {/* Heading */}
           <div className="flex flex-col items-center justify-center">
             {/* badge */}
-            {heroConfigs.whatsNew && (
+            {heroConfigs?.whatsNew && (
               <div className="mb-5 flex w-max items-center justify-start gap-3 rounded-full bg-white/10 p-0.5 pr-3 text-[0.65rem] font-semibold uppercase tracking-widest text-white ring-1 ring-gray-600/50">
                 <span className="flex w-max items-center justify-start gap-2 rounded-full bg-gradient-to-r from-skin-primary/70 to-skin-primary-yellow/70 px-2 py-1">
                   <svg className="size-4 text-white" viewBox="0 0 24 24">
@@ -33,17 +40,17 @@ const Page = async () => {
                   </svg>
                   <p className="hidden md:block">Whats new</p>
                 </span>
-                {heroConfigs.whatsNew}
+                {heroConfigs?.whatsNew}
               </div>
             )}
             {/* badge */}
 
             <h1 className="max-w-7xl text-balance text-center text-4xl font-medium text-white md:text-6xl">
-              {heroConfigs.heading}
+              {heroConfigs?.heading}
             </h1>
 
             <p className="mt-5 text-center font-mono text-xs text-white/80 md:text-lg">
-              {heroConfigs.subHeading}
+              {heroConfigs?.subHeading}
             </p>
           </div>
           {/* Heading */}
@@ -51,7 +58,7 @@ const Page = async () => {
           <AgentBuilderPrompt configs={heroConfigs} />
 
           {/* trusted by */}
-          <div className="mt-20 flex w-full flex-col items-center justify-center">
+          <div className="flex w-full flex-col items-center justify-center pt-20">
             <h3 className="rounded-full bg-white/5 px-5 py-1.5 text-[0.65rem] font-semibold uppercase tracking-widest text-white ring-2 ring-white/10">
               Backed, built and trusted by
             </h3>
@@ -64,10 +71,10 @@ const Page = async () => {
                 >
                   <svg
                     fill="none"
-                    viewBox={`0 0 ${company.viewbox}`}
+                    viewBox={`0 0 ${company?.viewbox}`}
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-full w-full object-contain"
-                    dangerouslySetInnerHTML={{ __html: company.svg }}
+                    dangerouslySetInnerHTML={{ __html: company?.svg }}
                   />
                 </div>
               ))}
@@ -79,8 +86,152 @@ const Page = async () => {
       {/* hero section */}
 
       {/* Feature section */}
-      <section className="min-h-dvh"></section>
+      <section className="flex flex-col items-center justify-start p-10 py-16">
+        <h3 className="rounded-full bg-white/5 px-5 py-1.5 text-[0.65rem] font-semibold uppercase tracking-widest text-white ring-2 ring-white/10">
+          Key Features
+        </h3>
+
+        <h1 className="mt-5 max-w-2xl text-balance text-center text-4xl font-medium text-white md:text-6xl">
+          {keyFeaturesConfigs?.heading}
+        </h1>
+
+        <p className="mt-5 max-w-2xl text-center font-mono text-xs text-white/80 md:text-base">
+          {keyFeaturesConfigs?.subHeading}
+        </p>
+
+        {/* cta */}
+        <div className="mt-10 flex items-center justify-center gap-5">
+          <button className="rounded-full bg-skin-primary px-5 py-3 text-sm font-medium text-white">
+            Start building now
+          </button>
+          <button className="rounded-full border border-gray-500 px-5 py-3 text-sm font-medium text-white">
+            Schedule a demo
+          </button>
+        </div>
+        {/* cta */}
+
+        {/* bento grid */}
+        <div className="mx-auto mt-20 grid w-full max-w-screen-lg grid-cols-1 justify-center gap-5 text-white md:grid-cols-6">
+          <div className="grid grid-cols-1 gap-5 md:col-span-2">
+            {/* slot 1 - 3 */}
+            {keyFeaturesConfigs?.features
+              ?.slice(0, keyFeaturesConfigs?.features?.length - 1)
+              .map((feature, idx) => (
+                <div
+                  key={idx}
+                  className="flex flex-col items-center justify-center rounded-xl border border-white/20 p-5"
+                >
+                  <div className="flex flex-col items-start justify-between">
+                    {feature?.icon && (
+                      <svg
+                        className="mb-2 size-8 text-skin-primary"
+                        fill="none"
+                        viewBox={`0 0 ${feature?.icon?.viewbox}`}
+                        xmlns="http://www.w3.org/2000/svg"
+                        dangerouslySetInnerHTML={{ __html: feature?.icon?.svg }}
+                      />
+                    )}
+
+                    {feature?.title && (
+                      <h2 className="text-xl font-medium text-white">
+                        {feature?.title}
+                      </h2>
+                    )}
+
+                    {feature?.description && (
+                      <p className="mt-2 text-xs text-white/80">
+                        {feature.description}
+                      </p>
+                    )}
+
+                    {feature?.image && (
+                      <img
+                        src={feature.image.asset.url}
+                        alt={feature.image.alt}
+                        className="h-full w-full object-cover"
+                      />
+                    )}
+                  </div>
+                </div>
+              ))}
+            {/* slot 1 - 3 */}
+          </div>
+
+          {keyFeaturesConfigs?.features?.length > 3 &&
+            keyFeaturesConfigs?.features
+              ?.slice(
+                keyFeaturesConfigs?.features?.length - 1,
+                keyFeaturesConfigs?.features?.length,
+              )
+              .map((feature, idx) => (
+                <div
+                  key={idx}
+                  className="flex flex-col items-center justify-center rounded-xl border border-white/20 p-5 md:col-span-4"
+                >
+                  <div className="flex flex-col items-start justify-between">
+                    {feature?.icon && (
+                      <svg
+                        className="mb-2 size-8 text-skin-primary"
+                        fill="none"
+                        viewBox={`0 0 ${feature?.icon?.viewbox}`}
+                        xmlns="http://www.w3.org/2000/svg"
+                        dangerouslySetInnerHTML={{ __html: feature?.icon?.svg }}
+                      />
+                    )}
+
+                    {feature?.title && (
+                      <h2 className="text-xl font-medium text-white">
+                        {feature?.title}
+                      </h2>
+                    )}
+
+                    {feature?.description && (
+                      <p className="mt-2 text-xs text-white/80">
+                        {feature?.description}
+                      </p>
+                    )}
+
+                    {feature?.image && (
+                      <img
+                        src={feature?.image?.asset?.url}
+                        alt={feature?.image?.alt}
+                        className="h-full w-full object-cover"
+                      />
+                    )}
+                  </div>
+                </div>
+              ))}
+        </div>
+        {/* bento grid */}
+      </section>
       {/* Feature section */}
+
+      {/* technology section */}
+      <section className="flex flex-col items-center justify-start p-10 py-16">
+        <h3 className="rounded-full bg-white/5 px-5 py-1.5 text-[0.65rem] font-semibold uppercase tracking-widest text-white ring-2 ring-white/10">
+          Our technology
+        </h3>
+
+        <h1 className="mt-5 max-w-7xl text-balance text-center text-4xl font-medium text-white md:text-6xl">
+          {technologyConfigs?.heading}
+        </h1>
+
+        <p className="mt-5 max-w-5xl text-center font-mono text-xs text-white/80 md:text-base">
+          {technologyConfigs?.subHeading}
+        </p>
+
+        {/* cta */}
+        <div className="mt-10 flex items-center justify-center gap-5">
+          <button className="rounded-full bg-skin-primary px-5 py-3 text-sm font-medium text-white">
+            Start building now
+          </button>
+          <button className="rounded-full border border-gray-500 px-5 py-3 text-sm font-medium text-white">
+            Schedule a demo
+          </button>
+        </div>
+        {/* cta */}
+      </section>
+      {/* technology section */}
     </main>
   );
 };
