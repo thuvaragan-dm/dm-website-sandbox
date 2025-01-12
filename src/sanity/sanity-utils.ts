@@ -17,6 +17,11 @@ export async function getHeroConfig() {
       "suggestions": suggestions[] {
           name,
           content
+        },
+      "trustedBy": trustedBy[] {
+          name,
+          svg,
+          viewbox
         }
     }`,
   );

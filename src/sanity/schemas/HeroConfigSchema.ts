@@ -37,6 +37,33 @@ export default {
         },
       ],
     },
+    {
+      title: "Trusted By",
+      name: "trustedBy",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          title: "company",
+          fields: [
+            { title: "Name", name: "name", type: "string" },
+            {
+              title: "Logo SVG path",
+              name: "svg",
+              type: "text",
+              description:
+                "Paste the complete SVG code here, excluding <svg> tag.",
+            },
+            {
+              title: "Viewbox",
+              description: "This is the format <number> <number>",
+              name: "viewbox",
+              type: "string",
+            },
+          ],
+        },
+      ],
+    },
   ],
 };
 
@@ -47,5 +74,10 @@ export type HeroConfigType = {
   suggestions: {
     name: string;
     content: string;
+  }[];
+  trustedBy: {
+    name: string;
+    svg: string;
+    viewbox: string;
   }[];
 };

@@ -13,7 +13,7 @@ const Page = async () => {
 
       {/* Hero section */}
       <HeroHighlight
-        containerClassName="min-h-dvh flex flex-col justify-start"
+        containerClassName="pt-16 min-h-dvh flex flex-col justify-start"
         patternClassName="[mask-image:linear-gradient(180deg,transparent,white,white,transparent)]"
       >
         <section className="flex min-h-dvh flex-1 flex-col items-center justify-center p-10">
@@ -21,7 +21,7 @@ const Page = async () => {
           <div className="flex flex-col items-center justify-center">
             {/* badge */}
             {heroConfigs.whatsNew && (
-              <div className="mb-5 flex w-max items-center justify-start gap-3 rounded-full bg-white/30 p-0.5 pr-3 text-[0.65rem] font-semibold uppercase tracking-widest text-white ring-1 ring-gray-600/50">
+              <div className="mb-5 flex w-max items-center justify-start gap-3 rounded-full bg-white/10 p-0.5 pr-3 text-[0.65rem] font-semibold uppercase tracking-widest text-white ring-1 ring-gray-600/50">
                 <span className="flex w-max items-center justify-start gap-2 rounded-full bg-gradient-to-r from-skin-primary/70 to-skin-primary-yellow/70 px-2 py-1">
                   <svg className="size-4 text-white" viewBox="0 0 24 24">
                     <path
@@ -49,6 +49,31 @@ const Page = async () => {
           {/* Heading */}
 
           <AgentBuilderPrompt configs={heroConfigs} />
+
+          {/* trusted by */}
+          <div className="mt-20 flex w-full flex-col items-center justify-center">
+            <h3 className="rounded-full bg-white/5 px-5 py-1.5 text-[0.65rem] font-semibold uppercase tracking-widest text-white ring-2 ring-white/10">
+              Backed, built and trusted by
+            </h3>
+
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-8 md:gap-10">
+              {heroConfigs?.trustedBy?.map((company, idx) => (
+                <div
+                  key={idx}
+                  className="flex h-20 w-20 items-center justify-center"
+                >
+                  <svg
+                    fill="none"
+                    viewBox={`0 0 ${company.viewbox}`}
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-full w-full object-contain"
+                    dangerouslySetInnerHTML={{ __html: company.svg }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* trusted by */}
         </section>
       </HeroHighlight>
       {/* hero section */}
