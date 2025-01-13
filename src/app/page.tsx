@@ -270,11 +270,11 @@ const Page = async () => {
           </h3>
 
           <h1 className="mt-5 max-w-7xl text-balance text-center text-4xl font-medium text-white md:text-6xl">
-            {technologyConfigs?.heading}
+            {whyDeepmodelConfigs?.heading}
           </h1>
 
           <p className="mt-5 max-w-5xl text-center font-mono text-xs text-white/80 md:text-base">
-            {technologyConfigs?.subHeading}
+            {whyDeepmodelConfigs?.subHeading}
           </p>
 
           <div className="mx-auto mt-24 grid max-w-screen-lg gap-10 gap-y-20 md:grid-cols-2 lg:grid-cols-3">
