@@ -3,6 +3,7 @@ import { HeroConfigType } from "./schemas/HeroConfigSchema";
 import { NavConfigType } from "./schemas/NavConfigSchema";
 import { KeyFeaturesConfigType } from "./schemas/KeyFeaturesConfig";
 import { TechnologyConfigType } from "./schemas/TechnologyConfigSchema";
+import { WhyDeepmodelConfig } from "./schemas/WhyDeepmodelSchema";
 
 export async function getHeroConfig() {
   const client = createClient({
@@ -113,6 +114,31 @@ export async function getTechnologyConfig() {
             viewbox,
             strokeWidth
           }
+        }
+      }
+    }`,
+  );
+}
+
+export async function getWhyDeepmodelConfig() {
+  const client = createClient({
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+    apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION!,
+  });
+
+  return await client.fetch<WhyDeepmodelConfig>(
+    groq`*[_type == "why-deepmodel-config"][0]{
+      heading,
+      subHeading,
+      reasons[]{
+        title,
+        description,
+        icon{
+          name,
+          svg,
+          viewbox,
+          strokeWidth
         }
       }
     }`,

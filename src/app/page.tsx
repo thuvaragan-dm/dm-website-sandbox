@@ -5,15 +5,19 @@ import {
   getKeyFeaturesConfig,
   getNavConfig,
   getTechnologyConfig,
+  getWhyDeepmodelConfig,
 } from "@/sanity/sanity-utils";
 import AgentBuilderPrompt from "./AgentBuilderPrompt";
 import FeatureConnections from "./FeatureConnections";
+import { cn } from "@/utilities/cn";
+import Grid from "@/components/patterns/Grid";
 
 const Page = async () => {
   const heroConfigs = await getHeroConfig();
   const navConfigs = await getNavConfig();
   const keyFeaturesConfigs = await getKeyFeaturesConfig();
   const technologyConfigs = await getTechnologyConfig();
+  const whyDeepmodelConfigs = await getWhyDeepmodelConfig();
 
   return (
     <main className="overflow-x-hidden bg-skin-primary-dark">
@@ -237,6 +241,71 @@ const Page = async () => {
         </div>
       </section>
       {/* technology section */}
+
+      {/* why deepmodel */}
+      <section className="relative flex flex-col items-center justify-start p-10 py-16">
+        {/* background */}
+        <div className="absolute inset-0 bg-skin-primary/10 [mask-image:linear-gradient(180deg,transparent,white,transparent)]">
+          <div className="relative h-full w-full">
+            <Grid
+              width={50}
+              height={50}
+              x={-6}
+              y={-6}
+              squares={[
+                [1, 1],
+                [12, 3],
+                [6, 4],
+              ]}
+              strokeDasharray={"4 2"}
+              className={cn("inset-0 opacity-60")}
+            />
+          </div>
+        </div>
+        {/* background */}
+
+        <div className="relative flex flex-col items-center">
+          <h3 className="rounded-full bg-white/5 px-5 py-1.5 text-[0.65rem] font-semibold uppercase tracking-widest text-white ring-2 ring-white/10">
+            Why Deepmodel
+          </h3>
+
+          <h1 className="mt-5 max-w-7xl text-balance text-center text-4xl font-medium text-white md:text-6xl">
+            {technologyConfigs?.heading}
+          </h1>
+
+          <p className="mt-5 max-w-5xl text-center font-mono text-xs text-white/80 md:text-base">
+            {technologyConfigs?.subHeading}
+          </p>
+
+          <div className="mx-auto mt-24 grid max-w-screen-lg gap-10 gap-y-20 md:grid-cols-2 lg:grid-cols-3">
+            {whyDeepmodelConfigs?.reasons?.map((reason, idx) => (
+              <div key={idx}>
+                <div className="w-min rounded-lg bg-skin-secondary p-1 text-skin-primary">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="size-7 text-skin-primary"
+                    viewBox={`0 0 ${reason?.icon?.viewbox}`}
+                    style={{
+                      stroke: "currentColor",
+                    }}
+                    preserveAspectRatio="xMidYMid meet"
+                    dangerouslySetInnerHTML={{ __html: reason?.icon?.svg }}
+                  />
+                </div>
+
+                <h3 className="mt-3 text-xl font-medium text-white">
+                  {reason?.title}
+                </h3>
+
+                <p className="mt-2 text-sm/5 text-white/80">
+                  {reason?.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* why deepmodel */}
     </main>
   );
 };
