@@ -1,6 +1,7 @@
+import FooterConfigSchema from "./FooterConfigSchema";
 import HeroConfigSchema from "./HeroConfigSchema";
-import NavConfigSchema from "./NavConfigSchema";
 import KeyFeaturesConfig from "./KeyFeaturesConfig";
+import NavConfigSchema from "./NavConfigSchema";
 import TechnologyConfigSchema from "./TechnologyConfigSchema";
 import WhyDeepmodelSchema from "./WhyDeepmodelSchema";
 
@@ -10,4 +11,5 @@ export default [
   KeyFeaturesConfig,
   TechnologyConfigSchema,
   WhyDeepmodelSchema,
+  FooterConfigSchema,
 ];

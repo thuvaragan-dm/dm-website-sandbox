@@ -1,7 +1,8 @@
 import { createClient, groq } from "next-sanity";
+import { FooterConfig } from "./schemas/FooterConfigSchema";
 import { HeroConfigType } from "./schemas/HeroConfigSchema";
-import { NavConfigType } from "./schemas/NavConfigSchema";
 import { KeyFeaturesConfigType } from "./schemas/KeyFeaturesConfig";
+import { NavConfigType } from "./schemas/NavConfigSchema";
 import { TechnologyConfigType } from "./schemas/TechnologyConfigSchema";
 import { WhyDeepmodelConfig } from "./schemas/WhyDeepmodelSchema";
 
@@ -141,6 +142,21 @@ export async function getWhyDeepmodelConfig() {
           strokeWidth
         }
       }
+    }`,
+  );
+}
+
+export async function getFooterConfig() {
+  const client = createClient({
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+    apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION!,
+  });
+
+  return await client.fetch<FooterConfig>(
+    groq`*[_type == "footer-config"][0]{
+      heading,
+      subHeading
     }`,
   );
 }

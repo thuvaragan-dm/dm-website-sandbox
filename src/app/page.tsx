@@ -1,16 +1,18 @@
 import { HeroHighlight } from "@/components/HeroHighlight";
 import Navbar from "@/components/layouts/Navbar";
+import Grid from "@/components/patterns/Grid";
 import {
+  getFooterConfig,
   getHeroConfig,
   getKeyFeaturesConfig,
   getNavConfig,
   getTechnologyConfig,
   getWhyDeepmodelConfig,
 } from "@/sanity/sanity-utils";
+import { cn } from "@/utilities/cn";
+import Link from "next/link";
 import AgentBuilderPrompt from "./AgentBuilderPrompt";
 import FeatureConnections from "./FeatureConnections";
-import { cn } from "@/utilities/cn";
-import Grid from "@/components/patterns/Grid";
 
 const Page = async () => {
   const heroConfigs = await getHeroConfig();
@@ -18,6 +20,7 @@ const Page = async () => {
   const keyFeaturesConfigs = await getKeyFeaturesConfig();
   const technologyConfigs = await getTechnologyConfig();
   const whyDeepmodelConfigs = await getWhyDeepmodelConfig();
+  const footerConfigs = await getFooterConfig();
 
   return (
     <main className="overflow-x-hidden bg-skin-primary-dark">
@@ -306,6 +309,78 @@ const Page = async () => {
         </div>
       </section>
       {/* why deepmodel */}
+
+      <footer className="flex flex-col items-center justify-start px-10 pb-10 pt-16">
+        <h1 className="mt-5 max-w-3xl text-wrap text-center text-4xl font-medium text-white md:text-6xl">
+          {footerConfigs?.heading}
+        </h1>
+
+        <p className="mt-5 max-w-5xl text-center font-mono text-xs text-white/80 md:text-base">
+          {footerConfigs?.subHeading}
+        </p>
+
+        {/* cta */}
+        <div className="mt-10 flex items-center justify-center gap-5">
+          <button className="rounded-full bg-skin-primary px-5 py-3 text-sm font-medium text-white">
+            Start building now
+          </button>
+          <button className="rounded-full border border-gray-500 px-5 py-3 text-sm font-medium text-white">
+            Schedule a demo
+          </button>
+        </div>
+        {/* cta */}
+
+        <div className="mx-auto mt-32 flex w-full max-w-screen-2xl flex-col items-center justify-between gap-10 md:flex-row md:items-start">
+          {/* logo */}
+          <div className="flex items-center justify-center gap-2 lg:w-max">
+            <div className="w-max rounded-xl bg-skin-primary p-2 text-white">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="size-5 text-skin-btn-text"
+                viewBox="0 0 32 32"
+              >
+                <path
+                  fill="currentColor"
+                  d="M26 22a3.96 3.96 0 00-2.02.566L17.414 16l6.567-6.567A3.95 3.95 0 0026 10a4 4 0 10-4-4 3.95 3.95 0 00.567 2.019L16 14.586 9.434 8.02A3.96 3.96 0 0010 6a4 4 0 10-4 4 3.96 3.96 0 002.02-.566L14.586 16l-6.567 6.567A3.95 3.95 0 006 22a4 4 0 104 4 3.95 3.95 0 00-.567-2.019L16 17.414l6.566 6.566A3.96 3.96 0 0022 26a4 4 0 104-4m0-18a2 2 0 11-2 2 2 2 0 012-2M6 28a2 2 0 112-2 2 2 0 01-2 2"
+                />
+              </svg>
+            </div>
+
+            <div className="w-full">
+              <h2 className="text-xl font-semibold text-white">DeepModel</h2>
+              <p className="text-[0.65rem] text-white/80">
+                The fastest way to building AI Agents
+              </p>
+            </div>
+          </div>
+          {/* logo */}
+
+          <div className="flex w-full flex-col items-start justify-end gap-5 md:w-auto md:flex-row md:gap-16">
+            {/* links */}
+            <div className="flex w-full flex-col items-center space-y-2 md:w-auto md:items-start">
+              <Link
+                href={"#"}
+                className="block text-sm text-white hover:underline"
+              >
+                Privacy
+              </Link>
+              <Link
+                href={"#"}
+                className="block text-sm text-white hover:underline"
+              >
+                Terms of service
+              </Link>
+            </div>
+            {/* links */}
+
+            <p className="w-full text-center text-sm text-white md:w-auto md:text-left">
+              &copy; {new Date().getFullYear()}{" "}
+              <br className="hidden md:block" /> San Francisco, CA{" "}
+              <br className="hidden md:block" /> 94114
+            </p>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 };
