@@ -1,4 +1,5 @@
 import { HeroHighlight } from "@/components/HeroHighlight";
+import Navbar from "@/components/layouts/Navbar";
 import {
   getHeroConfig,
   getKeyFeaturesConfig,
@@ -6,7 +7,7 @@ import {
   getTechnologyConfig,
 } from "@/sanity/sanity-utils";
 import AgentBuilderPrompt from "./AgentBuilderPrompt";
-import Navbar from "@/components/layouts/Navbar";
+import FeatureConnections from "./FeatureConnections";
 
 const Page = async () => {
   const heroConfigs = await getHeroConfig();
@@ -230,6 +231,10 @@ const Page = async () => {
           </button>
         </div>
         {/* cta */}
+
+        <div className="mx-auto mt-32 w-full max-w-screen-lg">
+          <FeatureConnections config={technologyConfigs} />
+        </div>
       </section>
       {/* technology section */}
     </main>

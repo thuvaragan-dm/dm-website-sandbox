@@ -86,6 +86,35 @@ export async function getTechnologyConfig() {
     groq`*[_type == "technology-config"][0]{
       heading,
       subHeading,
+      technologies{
+        slotOne {
+          title,
+          icon {
+            name,
+            svg,
+            viewbox,
+            strokeWidth
+          }
+        },
+        slotTwo {
+          title,
+          icon {
+            name,
+            svg,
+            viewbox,
+            strokeWidth
+          }
+        },
+        slotThree {
+          title,
+          icon {
+            name,
+            svg,
+            viewbox,
+            strokeWidth
+          }
+        }
+      }
     }`,
   );
 }
